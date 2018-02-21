@@ -50,7 +50,7 @@ Vue.use(VueApiService, {
 ```
 
 # Usage
-Let's say you've got an endpoints like this:
+Let's say you've got an endpoints config like this:
 
 ```javascript
 const endpoints = {
