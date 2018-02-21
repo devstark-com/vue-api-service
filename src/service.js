@@ -1,7 +1,6 @@
 import { fillSegments, mapValues } from './utils'
 
 export default function ApiService (client, endpoints, mocks) {
-
   const defaultHandler = (endpoint, key) => {
     const { method, url } = endpoint
     return (args) => {
