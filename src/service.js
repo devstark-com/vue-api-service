@@ -6,18 +6,20 @@ export default function ApiService (client, endpoints, mocks) {
     return (args) => {
       const { data, params, segments } = args || {}
       const urlFilled = fillSegments(url, segments)
-      return client({
+      const result = client({
         method,
         url: urlFilled,
         params,
         data,
         _endpointKey: key
       })
+      if (endpoint.processResponse) return result.then(endpoint.processResponse)
+      return result
     }
   }
 
   const apiMethods = mapValues(endpoints, (endpoint, key) => {
-    if (endpoint.handler) return endpoint.handler
+    if (endpoint.handler) return endpoint.handler(endpoint, key, client)
     return defaultHandler(endpoint, key)
   })
 
