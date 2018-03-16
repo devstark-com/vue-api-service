@@ -2,7 +2,7 @@ import { fillSegments, mapValues } from './utils'
 
 export default function ApiService (client, endpoints, mocks) {
   const defaultHandler = (endpoint, key) => {
-    const { method, url } = endpoint
+    const { method, url, options } = endpoint
     return (args) => {
       const { data, params, segments } = args || {}
       const urlFilled = fillSegments(url, segments)
@@ -11,7 +11,8 @@ export default function ApiService (client, endpoints, mocks) {
         url: urlFilled,
         params,
         data,
-        _endpointKey: key
+        _endpointKey: key,
+        ...options
       })
       if (endpoint.processResponse) return result.then(endpoint.processResponse)
       return result
