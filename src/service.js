@@ -4,13 +4,14 @@ export default function ApiService (client, endpoints, mocks) {
   const defaultHandler = (endpoint, key) => {
     const { method, url, options } = endpoint
     return (args) => {
-      const { data, params, segments } = args || {}
+      const { data, params, segments, headers } = args || {}
       const urlFilled = fillSegments(url, segments)
       const result = client({
         method,
         url: urlFilled,
         params,
         data,
+        headers,
         _endpointKey: key,
         ...options
       })

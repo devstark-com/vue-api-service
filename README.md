@@ -73,7 +73,8 @@ Call an API endpoint in the app like this:
 this.$api.addComment({
   data: { key: 'value' }, // goes to the request body
   segments: { postId: 1 }, // replaces ':postId' in the endpoint url config with value
-  params: { type: 'review' } // goes to url params: ?type=review
+  params: { type: 'review' } // goes to url params: ?type=review,
+  headers: { 'x-authorization': 'token' } // goes to the request body
 })
   .then(response => {
     console.log(response.data)
